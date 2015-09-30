@@ -1,10 +1,4 @@
 <?php
-/**
- * @author Oscar Batlle <oscarbatlle@gmail.com>
- */
-
-namespace App;
-putenv('GDFONTPATH=' . public_path());
 
 class MemeGenerator {
 
@@ -194,7 +188,7 @@ class MemeGenerator {
         return $finalOutput;
     }
 
-    public function processImg($preview, $memeurl)
+    public function processImg($preview)
     {
         if ($this->lowerText != "")
         {
@@ -209,12 +203,23 @@ class MemeGenerator {
         {
             // Set the content type header - in this case image/jpeg
             header('Content-Type: image/jpeg');
-            imagejpeg($this->im);
+            imagejpeg($this->im, null, 100);
             imagedestroy($this->im);
         } else
         {
-            imagejpeg($this->im, $memeurl);
+            imagejpeg($this->im, 'test6.jpg');
             imagedestroy($this->im);
         }
     }
 }
+
+putenv('GDFONTPATH=' . realpath('.'));
+$image = $_REQUEST['image'];
+$obj = new MemeGenerator($image);
+$preview = $_REQUEST['preview'];
+$upmsg   = $_REQUEST['top'];
+$downmsg = $_REQUEST['bottom'];
+
+$obj->setUpperText($upmsg);
+$obj->setLowerText($downmsg);
+$obj->processImg($preview);
