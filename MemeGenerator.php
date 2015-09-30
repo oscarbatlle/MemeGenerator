@@ -207,7 +207,7 @@ class MemeGenerator {
             imagedestroy($this->im);
         } else
         {
-            imagejpeg($this->im, 'test6.jpg');
+            imagejpeg($this->im, 'new-meme.jpg');
             imagedestroy($this->im);
         }
     }

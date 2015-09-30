@@ -14,15 +14,14 @@ $(document).ready(function () {
     });
 
     $('form').on('submit', function(e){
+        e.preventDefault();
         var toptext = $('input[name="toptext"]').val();
         var bottomtext = $('input[name="bottomtext"]').val();
         var image = $('#memeCanvas').find('img').attr('rel');
-
-      e.preventDefault();
-      $.ajax({
+        $.ajax({
         url: 'MemeGenerator.php',
         type: 'POST',
-        data: {upmsg: toptext, downmsg: bottomtext, preview: 0, image: image},
+        data: {top: toptext, bottom: bottomtext, preview: 0, image: image},
         success: function(e){
           $('#memeCanvas').attr('src', e);
         }
